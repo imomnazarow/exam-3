@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar container">
+        <h2 class="title">Where in the world?</h2>
+        <div id="mode-btn" class="mode-part">
+          <img id="mode-img" src="./images/moon.svg" alt="" />
+          <p id="mode-text">Dark Mode</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="events container">
+        <div class="search">
+          <img src="./images/search-light.svg" alt="" />
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for a country…"
+          />
+        </div>
+        <div class="filter-wrapper">
+          <div class="filter" id="filter-btn">
+            <p>Filter by Region</p>
+            <img id="fIcon" src="./images/filter-icon-light.svg" alt="Filter" />
+          </div>
+
+          <div class="region-options hidden" id="region-options">
+            <p data-region="all">All</p>
+            <p data-region="Africa">Africa</p>
+            <p data-region="America">America</p>
+            <p data-region="Asia">Asia</p>
+            <p data-region="Europe">Europe</p>
+            <p data-region="Oceania">Oceania</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="countries container">
+        <div class="country" data-region="Europe">
+          <img src="./images/flag-germany.png" alt="Germany" />
+          <div class="c-intros">
+            <h2>Germany</h2>
+            <p class="intro-key">
+              Population: <span class="value">81,770,900</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Europe</span></p>
+            <p class="intro-key">Capital: <span class="value">Berlin</span></p>
+          </div>
+        </div>
+
+        <div class="country" data-region="America">
+          <img src="./images/flag-usa.png" alt="USA" />
+          <div class="c-intros">
+            <h2>United States of America</h2>
+            <p class="intro-key">
+              Population: <span class="value">323,947,000</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Americas</span></p>
+            <p class="intro-key">
+              Capital: <span class="value">Washington, D.C.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="country" data-region="America">
+          <img src="./images/flag-brazil.png" alt="Brazil" />
+          <div class="c-intros">
+            <h2>Brazil</h2>
+            <p class="intro-key">
+              Population: <span class="value">206,135,893</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Americas</span></p>
+            <p class="intro-key">
+              Capital: <span class="value">Brasília</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="country" data-region="Europe">
+          <img src="./images/flagiiceland.png" alt="Iceland" />
+          <div class="c-intros">
+            <h2>Iceland</h2>
+            <p class="intro-key">
+              Population: <span class="value">334,300</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Europe</span></p>
+            <p class="intro-key">
+              Capital: <span class="value">Reykjavík</span>
+            </p>
+          </div>
+        </div>
+        <div class="country" data-region="Asia">
+          <img src="./images/afghanistan.png" alt="Afghanistan" />
+          <div class="c-intros">
+            <h2>Afghanistan</h2>
+            <p class="intro-key">
+              Population: <span class="value">27,657,145</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Asia</span></p>
+            <p class="intro-key">Capital: <span class="value">Kabul</span></p>
+          </div>
+        </div>
+
+        <div class="country" data-region="Europe">
+          <img src="./images/aland-iceland.png" alt="Aland-Island" />
+          <div class="c-intros">
+            <h2>Åland Islands</h2>
+            <p class="intro-key">
+              Population: <span class="value">28,875</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Europe</span></p>
+            <p class="intro-key">
+              Capital: <span class="value">Mariehamn</span>
+            </p>
+          </div>
+        </div>
+        <div class="country" data-region="Europe">
+          <img src="./images/albenia.png" alt="Albania" />
+          <div class="c-intros">
+            <h2>Albania</h2>
+            <p class="intro-key">
+              Population: <span class="value">2,886,026</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Europe</span></p>
+            <p class="intro-key">Capital: <span class="value">Tirana</span></p>
+          </div>
+        </div>
+        <div class="country" data-region="Africa">
+          <img src="./images/algeria.png" alt="Algeria" />
+          <div class="c-intros">
+            <h2>Algeria</h2>
+            <p class="intro-key">
+              Population: <span class="value">40,400,000</span>
+            </p>
+            <p class="intro-key">Region: <span class="value">Africa</span></p>
+            <p class="intro-key">Capital: <span class="value">Algiers</span></p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
