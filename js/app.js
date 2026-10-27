@@ -1,3 +1,20 @@
+//=====
+function save(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (e) {}
+}
+
+function load(key, fallback) {
+  try {
+    const v = localStorage.getItem(key);
+    return v === null ? fallback : v;
+  } catch (e) {
+    return fallback;
+  }
+}
+//=========
+
 const btnEl = document.querySelector("#mode-btn");
 const btnEl2 = document.querySelector("#mode-img");
 const btnEl3 = document.querySelector("#mode-text");
@@ -17,6 +34,13 @@ btnEl.addEventListener("click", () => {
     btnEl3.textContent = "Dark Mode";
     btnfIcon.src = "./images/filter-icon-light.svg";
   }
+
+  //=========
+  save(
+    "theme",
+    document.body.classList.contains("dark-mode") ? "dark" : "light",
+  );
+  //========
 });
 
 //
@@ -26,31 +50,10 @@ btnEl.addEventListener("click", () => {
 let filterBtn = document.querySelector("#filter-btn");
 let regionOptions = document.querySelector("#region-options");
 let regions = document.querySelectorAll(".region-options p");
-let countries = document.querySelectorAll(".country");
+// let countries = document.querySelectorAll(".country");
 
 filterBtn.addEventListener("click", () => {
   regionOptions.classList.toggle("hidden");
-});
-
-regions.forEach((region) => {
-  region.addEventListener("click", () => {
-    let selectedRegion = region.dataset.region;
-
-    countries.forEach((country) => {
-      let countryRegion = country.dataset.region;
-
-      if (
-        selectedRegion === "all" ||
-        country.dataset.region === selectedRegion
-      ) {
-        country.classList.remove("hidden");
-      } else {
-        country.classList.add("hidden");
-      }
-    });
-
-    regionOptions.classList.add("hidden");
-  });
 });
 
 let searchInput = document.querySelector("#searchInput");
@@ -58,37 +61,83 @@ let countriesContainer = document.querySelector(".countries");
 
 let selectedRegion = "all";
 
-function filterCountries() {
-  let searchText = searchInput.value.toLowerCase().trim();
+function updateUi(arr) {
+  countriesContainer.innerHTML = "";
 
-  countries.forEach((country) => {
-    let countryName = country.querySelector("h2").textContent.toLowerCase();
-    let countryRegion = country.dataset.region;
-
-    let regionMatch =
-      selectedRegion === "all" || countryRegion === selectedRegion;
-
-    let searchMatch = countryName.includes(searchText);
-
-    if (regionMatch && searchMatch) {
-      country.classList.remove("hidden");
-    } else {
-      country.classList.add("hidden");
-    }
+  arr.forEach((country) => {
+    countriesContainer.innerHTML += `
+      <div class="country">
+        <img src="${country.flag}" alt="${country.name}">
+        <div class="c-intros">
+          <h2>${country.name}</h2>
+          <p class="intro-key">Population: <span class="value">${country.population.toLocaleString()}</span></p>
+          <p class="intro-key">Region: <span class="value">${country.region}</span></p>
+          <p class="intro-key">Capital: <span class="value">${country.capital}</span></p>
+        </div>
+      </div>
+    `;
   });
+}
+
+async function getCountries() {
+  try {
+    let response;
+
+    if (selectedRegion === "all") {
+      response = await fetch(
+        `https://countries-api-steel-theta.vercel.app/api/countries?name=${searchInput.value}`,
+      );
+    } else {
+      response = await fetch(
+        `https://countries-api-steel-theta.vercel.app/api/countries?name=${searchInput.value}&region=${selectedRegion}`,
+      );
+    }
+
+    if (!response.ok) {
+      throw new Error("Countries olib kelishda xato");
+    }
+
+    let data = await response.json();
+    console.log(data);
+
+    updateUi(data.data);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 //
 // search
 //
 
-searchInput.addEventListener("input", filterCountries);
+searchInput.addEventListener("input", () => {
+  save("search", searchInput.value);
+  getCountries();
+});
 
 regions.forEach((region) => {
   region.addEventListener("click", () => {
     selectedRegion = region.dataset.region;
+    save("region", selectedRegion);
 
-    filterCountries();
+    getCountries();
     regionOptions.classList.add("hidden");
   });
 });
+
+// ====
+// theme
+if (load("theme", "light") === "dark") {
+  document.body.classList.add("dark-mode");
+  btnEl2.src = "./images/sunrise.svg";
+  btnEl2.style.filter = "brightness(0) invert(1)";
+  btnEl3.textContent = "Light Mode";
+  btnfIcon.src = "./images/filter-icon-dark.svg";
+}
+
+// region + search
+selectedRegion = load("region", "all");
+searchInput.value = load("search", "");
+getCountries();
+
+//=========

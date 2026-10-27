@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Countries</title>
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
@@ -36,7 +36,7 @@
           <div class="region-options hidden" id="region-options">
             <p data-region="all">All</p>
             <p data-region="Africa">Africa</p>
-            <p data-region="America">America</p>
+            <p data-region="Americas">America</p>
             <p data-region="Asia">Asia</p>
             <p data-region="Europe">Europe</p>
             <p data-region="Oceania">Oceania</p>
@@ -44,20 +44,9 @@
         </div>
       </div>
 
-      <div class="countries container">
-        <div class="country" data-region="Europe">
-          <img src="./images/flag-germany.png" alt="Germany" />
-          <div class="c-intros">
-            <h2>Germany</h2>
-            <p class="intro-key">
-              Population: <span class="value">81,770,900</span>
-            </p>
-            <p class="intro-key">Region: <span class="value">Europe</span></p>
-            <p class="intro-key">Capital: <span class="value">Berlin</span></p>
-          </div>
-        </div>
+      <div class="countries container" id="countries"></div>
 
-        <div class="country" data-region="America">
+      <!-- <div class="country" data-region="America">
           <img src="./images/flag-usa.png" alt="USA" />
           <div class="c-intros">
             <h2>United States of America</h2>
@@ -69,9 +58,9 @@
               Capital: <span class="value">Washington, D.C.</span>
             </p>
           </div>
-        </div>
+        </div> -->
 
-        <div class="country" data-region="America">
+      <!-- <div class="country" data-region="America">
           <img src="./images/flag-brazil.png" alt="Brazil" />
           <div class="c-intros">
             <h2>Brazil</h2>
@@ -145,7 +134,7 @@
             <p class="intro-key">Capital: <span class="value">Algiers</span></p>
           </div>
         </div>
-      </div>
+      </div> -->
     </main>
 
     <script type="module" src="./js/app.js"></script>
